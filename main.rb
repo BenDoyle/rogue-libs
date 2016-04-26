@@ -1,16 +1,16 @@
-require 'tty-prompt'
-require 'sqlite3'
+require File.join('.', 'environment.rb')
 
 prompt = TTY::Prompt.new
 
+while true
 
-answer = prompt.yes?('Do you like Ruby?')
-puts "you selected #{answer}!"
+  location = Player.current_location
+  options = location.movement_options
 
+  puts
+  puts "You are currently at #{location.content}"
+  answer = prompt.select("What next?", options.map{|e|e.content})
 
-answer = prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
-puts "you selected #{answer}!"
+  Player.move_to(options.find{|e|e.content == answer}.to_node)
 
-
-answer = prompt.keypress("Which one do you prefer a, b, c or d ?")
-puts "you selected #{answer}!"
+end

@@ -1,6 +1,8 @@
 # rogue-libs
-my roguelike!
+my roguelike / interactive fiction crossover!
 
 Current thoughts:
-- work with sqlite as datastore
 - script with ruby
+- work with sqlite as datastore
+- use active_record for ORM
+- use TTY to interact
