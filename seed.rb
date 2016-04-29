@@ -5,6 +5,7 @@ b = Location.create(content: "Second Node")
 c = Location.create(content: "Third Node")
 
 d = Player.create(content: "The Player")
+e = Admin.create(content: "Quit this silly game")
 
 Movement.create(
   content: "Walk between First Node and Second Node",

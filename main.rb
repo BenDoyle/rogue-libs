@@ -1,16 +1,21 @@
 require File.join('.', 'environment.rb')
 
-prompt = TTY::Prompt.new
+Prompt = TTY::Prompt.new
 
-while true
+while Player.playing
 
-  location = Player.current_location
-  options = location.movement_options
-
+  # describe game state
   puts
-  puts "You are currently at #{location.content}"
-  answer = prompt.select("What next?", options.map{|e|e.content})
+  puts "You are currently at #{Player.current_location.content}"
 
-  Player.move_to(options.find{|e|e.content == answer}.to_node)
+  # provide options
+  action_selection = Prompt.select("What next?") do |menu|
+    Player.action_options.each do |option|
+      menu.choice option.content, option
+    end
+  end
+
+  # update game state
+  Player.act(action_selection)
 
 end
