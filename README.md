@@ -1,6 +1,3 @@
-# rogue-libs
-my roguelike / interactive fiction crossover!
-
 Tool choices:
 - script with ruby
 - work with sqlite as datastore
