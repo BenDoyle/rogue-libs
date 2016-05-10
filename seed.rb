@@ -17,7 +17,7 @@ Occupy.create(
 	"Torture Chamber",
 	"Puzzle Room",
 	"Throne Room",
-	"Stringe Room",
+	"Strange Room",
 	"Range Room",
 	"Music Room",
 	"Studio",

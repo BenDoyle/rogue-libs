@@ -40,22 +40,20 @@ end
 
 class Player < Node
 
-  def self.admin_options
-    Admin.all
-  end
-
   def self.action_options
     Player.current_location.movement_options
   end
 
   def self.current_location
-    Player.first.from_edges[0].to_node
+    Player.first.from_edges.order(:created_at).last.to_node
   end
 
   def self.act(action)
-    from_edge = Player.first.from_edges.first
-    from_edge.to_node = action.to_node
-    from_edge.save
+		Occupy.create(
+		  content: "The location of The Player",
+		  from_id: Player.first.id,
+		  to_id: action.to_id,
+		)
   end
 
 end
