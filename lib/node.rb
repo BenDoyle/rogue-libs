@@ -40,18 +40,18 @@ end
 
 class Character < Node
 
-  def self.action_options
-    Character.current_location.movement_options
+  def action_options
+    current_location.movement_options
   end
 
-  def self.current_location
-    Character.first.from_edges.order(:created_at).last.to_node
+  def current_location
+    from_edges.order(:created_at).last.to_node
   end
 
-  def self.act(action)
+  def act(action)
 		Occupy.create(
-		  content: "The location of The Player",
-		  from_id: Character.first.id,
+		  content: "The location of #{self.content}",
+		  from_id: self.id,
 		  to_id: action.to_id,
 		)
   end

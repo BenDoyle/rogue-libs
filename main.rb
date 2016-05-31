@@ -6,16 +6,23 @@ while true
 
   # describe game state
   puts
-  puts "You are currently at #{Character.current_location.content}"
+  puts "You are currently at #{World.player.current_location.content}"
+  if World.player.current_location == World.enemy.current_location
+    puts "You see #{World.enemy.content}!"
+  end
 
   # provide options
   action_selection = Prompt.select("What next (^C to quit)?") do |menu|
-    Character.action_options.each do |option|
+    World.player.action_options.each do |option|
       menu.choice option.content, option
     end
+    menu.choice "Rebuild World", :rebuild_world
   end
 
-  # update game state
-  Character.act(action_selection)
+  if action_selection == :rebuild_world
+    World.build
+  else
+    World.player.act(action_selection)
+  end
 
 end

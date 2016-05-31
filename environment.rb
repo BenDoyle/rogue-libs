@@ -9,3 +9,8 @@ ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',
   :database => './data.db'
 )
+
+unless ActiveRecord::Base.connection.table_exists?('nodes') && ActiveRecord::Base.connection.table_exists?('edges')
+	load File.join('.', 'setup.rb')
+	World.build
+end
