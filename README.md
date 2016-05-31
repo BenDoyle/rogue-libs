@@ -19,3 +19,4 @@ To Do:
 - [ ] reimplement content as json blob, description is its first attribute
 - [ ] add `known_to_player`, `known_to_adversary` to `movement_option` edges and `location` nodes, to support varying access to and knowledge of the game world
 - [ ] implement `visible` and `audible` as new location-location edges, `scent` as player/enemy-location edge
+- [ ] implement a mobile enemy
