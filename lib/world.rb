@@ -59,11 +59,25 @@ class World
 		populate_world
 	end
 
+	def self.extend_room(room, room_descriptions)
+		room_descriptions.sort_by!{rand}
+		extension_descriptions = room_descriptions.shift(rand(1..2))
+		extension_descriptions.each do |extension_description|
+			extension_room = room.add_adjacent_location(extension_description)
+			unless room_descriptions.empty?
+				room_descriptions = extend_room(extension_room, room_descriptions)
+			end
+		end
+		room_descriptions
+	end
+
 	def self.build_local
 		clear_world
 
 		# create the world
-
+		room_descriptions = World.room_names
+		room = Location.create(content: room_descriptions.shift)
+		extend_room(room, room_descriptions)
 
 		populate_world
 	end
