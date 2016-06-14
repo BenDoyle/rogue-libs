@@ -20,7 +20,7 @@ while true
   end
 
   if action_selection == :rebuild_world
-    World.build
+    World.build_global
   else
     World.player.act(action_selection)
   end
