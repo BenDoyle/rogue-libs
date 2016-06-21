@@ -1,5 +1,3 @@
-require File.join('.', 'environment.rb')
-
 class World
 
 	def self.player
