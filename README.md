@@ -16,7 +16,7 @@ To Do:
 - [x] implement "the enemy"
 - [x] remove seed, give player the admin options to create and destroy the game world
 - [x] implement local / recursive world builder (currently have a global builder)
-- [ ] reimplement content as json blob, description is its first attribute
+- [x] reimplement content as json blob, description is its first attribute
 - [ ] add `known_to_player`, `known_to_adversary` to `movement_option` edges and `location` nodes, to support varying access to and knowledge of the game world
 - [ ] implement `visible` and `audible` as new location-location edges, `scent` as player/enemy-location edge
 - [ ] implement a mobile enemy
