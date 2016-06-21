@@ -1,11 +1,11 @@
 class World
 
 	def self.player
-		@@player ||= Character.where(content: "The Player").first
+		@@player ||= Character.where(description: "The Player").first
 	end
 
 	def self.enemy
-		@@enemy ||= Character.where(content: "The Enemy").first
+		@@enemy ||= Character.where(description: "The Enemy").first
 	end
 
 	def self.room_names
@@ -33,8 +33,8 @@ class World
 
 	def self.populate_world
 		# create the player and the enemy
-		@@player = Character.create(content: "The Player")
-		@@enemy = Character.create(content: "The Enemy")
+		@@player = Character.create(description: "The Player")
+		@@enemy = Character.create(description: "The Enemy")
 
 		# place the player and enemy
 		@@player.act(Movement.order('random()').first)
@@ -45,7 +45,7 @@ class World
 		clear_world
 
 		# create the world
-		Location.create(content: room_names[0])
+		Location.create(description: room_names[0])
 		room_names[1..-1].each do |description|
 			Location.order("random()").first.add_adjacent_location(description)
 		end
@@ -74,7 +74,7 @@ class World
 
 		# create the world
 		room_descriptions = World.room_names
-		room = Location.create(content: room_descriptions.shift)
+		room = Location.create(description: room_descriptions.shift)
 		extend_room(room, room_descriptions)
 
 		populate_world

@@ -1,6 +1,8 @@
 class Node < ActiveRecord::Base
   has_many :from_edges, class_name: "Edge", foreign_key: "from_id"
   has_many :to_edges, class_name: "Edge", foreign_key: "to_id"
+
+  serialize :properties, JSON
 end
 
 class Location < Node
@@ -10,14 +12,14 @@ class Location < Node
 
   def add_adjacent_location(description=nil)
   	description ||= rand(1000)
-		other = Location.create(content: description)
+		other = Location.create(description: description)
 		Movement.create(
-		  content: "Walk between #{self.content} and #{other.content}",
+		  description: "Walk between #{self.description} and #{other.description}",
 		  from_id: self.id,
 		  to_id: other.id,
 		)
 		Movement.create(
-		  content: "Walk between #{other.content} and #{self.content}",
+		  description: "Walk between #{other.description} and #{self.description}",
 		  from_id: other.id,
 		  to_id: self.id,
 		)
@@ -26,12 +28,12 @@ class Location < Node
 
   def connect_to_location(other_location)
 		Movement.create(
-		  content: "Walk between #{self.content} and #{other_location.content}",
+		  description: "Walk between #{self.description} and #{other_location.description}",
 		  from_id: self.id,
 		  to_id: other_location.id,
 		)
 		Movement.create(
-		  content: "Walk between #{other_location.content} and #{self.content}",
+		  description: "Walk between #{other_location.description} and #{self.description}",
 		  from_id: other_location.id,
 		  to_id: self.id,
 		)
@@ -50,7 +52,7 @@ class Character < Node
 
   def act(action)
 		Occupy.create(
-		  content: "The location of #{self.content}",
+		  description: "The location of #{self.description}",
 		  from_id: self.id,
 		  to_id: action.to_id,
 		)

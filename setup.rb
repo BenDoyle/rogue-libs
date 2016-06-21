@@ -7,7 +7,8 @@ class CreateEdges < ActiveRecord::Migration
       t.column :to_id, :integer
       t.column :type, :string
       t.column :created_at, :datetime
-      t.column :content, :text
+      t.column :description, :text
+      t.column :properties, :text, default: '{}'
     end
   end
 end
@@ -17,7 +18,8 @@ class CreateNodes < ActiveRecord::Migration
     create_table(:nodes) do |t|
       t.column :type, :string
       t.column :created_at, :datetime
-      t.column :content, :text
+      t.column :description, :text
+      t.column :properties, :text, default: '{}'
     end
   end
 end
