@@ -12,5 +12,5 @@ ActiveRecord::Base.establish_connection(
 
 unless ActiveRecord::Base.connection.table_exists?('nodes') && ActiveRecord::Base.connection.table_exists?('edges')
 	load File.join('.', 'setup.rb')
-	World.build_global
+	World.build_local
 end
