@@ -6,10 +6,17 @@ while true
 
   # describe game state
   puts
-  puts "You are currently at #{World.player.current_location.description}"
   if World.player.current_location == World.enemy.current_location
-    puts "You see #{World.enemy.description}!"
+    puts "You are currently at #{World.player.current_location.description}. You see #{World.enemy.description}!"
+  else
+    puts "You are currently at #{World.player.current_location.description}"
   end
+  World.player.current_location.visible_locations.each do |visible|
+    puts "  #{visible.description}#{visible.to_node == World.enemy.current_location ? "... #{World.enemy.description} is there!" : ''}"
+  end
+
+
+  puts
 
   # provide options
   action_selection = Prompt.select("What next (^C to quit)?") do |menu|

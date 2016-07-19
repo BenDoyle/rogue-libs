@@ -10,3 +10,6 @@ end
 
 class Occupy < Edge
 end
+
+class Visible < Edge
+end

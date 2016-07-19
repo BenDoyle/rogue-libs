@@ -29,6 +29,7 @@ class World
 		Location.destroy_all
 		Occupy.destroy_all
 		Movement.destroy_all
+		Visible.destroy_all
 	end
 
 	def self.populate_world
@@ -62,6 +63,20 @@ class World
 		extension_descriptions = room_descriptions.shift(rand(1..2))
 		extension_descriptions.each do |extension_description|
 			extension_room = room.add_adjacent_location(extension_description)
+
+			if rand < 0.8
+				Visible.create(
+				  description: "You can see #{extension_room.description} from #{room.description}",
+				  from_id: room.id,
+				  to_id: extension_room.id,
+				)
+				Visible.create(
+				  description: "You can see #{room.description} from #{extension_room.description}",
+				  from_id: extension_room.id,
+				  to_id: room.id,
+				)
+			end
+
 			unless room_descriptions.empty?
 				room_descriptions = extend_room(extension_room, room_descriptions)
 			end

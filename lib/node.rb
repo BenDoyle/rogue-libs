@@ -7,7 +7,11 @@ end
 
 class Location < Node
   def movement_options
-    from_edges
+    from_edges.where(type: Movement)
+  end
+
+  def visible_locations
+  	from_edges.where(type: Visible)
   end
 
   def add_adjacent_location(description=nil)
