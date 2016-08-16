@@ -18,7 +18,7 @@ class World
 			"Range Room",
 			"Music Room",
 			"Studio",
-			"Labortitory",
+			"Laboratory",
 			"Distillery",
 		]
 	end
