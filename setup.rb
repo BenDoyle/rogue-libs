@@ -8,6 +8,7 @@ class CreateEdges < ActiveRecord::Migration
       t.column :type, :string
       t.column :created_at, :datetime
       t.column :description, :text
+      t.column :weight, :float, default: 1
       t.column :properties, :text, default: '{}'
     end
   end

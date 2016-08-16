@@ -54,6 +54,25 @@ class Character < Node
     from_edges.order(:created_at).last.to_node
   end
 
+  # TODO: this method is deph first, should make it breadth first
+  def self.sound_attenuation(location_id_a, location_id_b, path=[])
+  	if location_id_a == location_id_b
+  		return 0
+  	else
+  		adjacent = Audible.where(from_id: location_id_a)
+  		unless path.empty?
+  			adjacent = adjacent.where.not(to_id: path)
+  		end
+  		if adjacent.count > 0
+	  		attenuatations = adjacent.map do |audible|
+	  			puts (path + [location_id_a]).inspect
+	  			audible.weight + sound_attenuation(audible.to_id, location_id_b, path + [location_id_a])
+	  		end
+	  		return attenuatations.min
+	  	end
+  	end
+  end
+
   def act(action)
 		Occupy.create(
 		  description: "The location of #{self.description}",

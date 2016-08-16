@@ -13,3 +13,6 @@ end
 
 class Visible < Edge
 end
+
+class Audible < Edge
+end

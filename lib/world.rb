@@ -64,18 +64,33 @@ class World
 		extension_descriptions.each do |extension_description|
 			extension_room = room.add_adjacent_location(extension_description)
 
-			if rand < 0.8
-				Visible.create(
-				  description: "You can see #{extension_room.description} from #{room.description}",
-				  from_id: room.id,
-				  to_id: extension_room.id,
-				)
-				Visible.create(
-				  description: "You can see #{room.description} from #{extension_room.description}",
-				  from_id: extension_room.id,
-				  to_id: room.id,
-				)
-			end
+			Visible.create(
+			  description: "You can see #{extension_room.description} from #{room.description}",
+			  from_id: room.id,
+			  to_id: extension_room.id,
+			) if rand < 0.8
+
+			Visible.create(
+			  description: "You can see #{room.description} from #{extension_room.description}",
+			  from_id: extension_room.id,
+			  to_id: room.id,
+			) if rand < 0.8
+
+			sound_impedence = rand + rand
+
+			Audible.create(
+			  description: "You can hear #{extension_room.description} from #{room.description}",
+			  from_id: room.id,
+			  to_id: extension_room.id,
+			  weight: sound_impedence,
+			)
+
+			Audible.create(
+			  description: "You can hear #{room.description} from #{extension_room.description}",
+			  from_id: extension_room.id,
+			  to_id: room.id,
+			  weight: sound_impedence,
+			)
 
 			unless room_descriptions.empty?
 				room_descriptions = extend_room(extension_room, room_descriptions)
